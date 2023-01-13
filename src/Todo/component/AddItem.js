@@ -9,12 +9,15 @@ export default function AddItem () {
     
     const addItem = (e) => {
         e.preventDefault()
-        dispatch({type: IS_ITEM_ADDED_MSG, payload: true})
-        dispatch({type: ADD_ITEM, payload: name})
-        setName("")        
-        setTimeout(() => {
-            dispatch({type: IS_ITEM_ADDED_MSG, payload: false})
-        }, 2000)
+        if(name) {
+            dispatch({type: IS_ITEM_ADDED_MSG, payload: true})
+            dispatch({type: ADD_ITEM, payload: name})
+            setName("")        
+            setTimeout(() => {
+                dispatch({type: IS_ITEM_ADDED_MSG, payload: false})
+            }, 2000)   
+        }
+
 
     }
 
