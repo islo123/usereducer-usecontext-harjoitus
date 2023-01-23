@@ -1,36 +1,31 @@
 import React, { useState } from 'react'
 import { useListContext } from '../context/ListContext'
-import { ADD_ITEM, IS_ITEM_ADDED_MSG } from '../reducer/ListReducer'
+import { ADD_TODO, IS_ADD_ITEM_MODAL_OPEN } from '../reducer/ListReducer'
 
-export default function AddItem () {
+export default function AddItem() {
+
     const [ name, setName ] = useState("")
 
-    const { isItemDeleted, isItemAddedMsg, dispatch } = useListContext()
-    
-    const addItem = (e) => {
+    const { dispatch } = useListContext()
+
+    const addTodo = (e) => {
         e.preventDefault()
         if(name) {
-            dispatch({type: IS_ITEM_ADDED_MSG, payload: true})
-            dispatch({type: ADD_ITEM, payload: name})
-            setName("")        
+            dispatch({type: IS_ADD_ITEM_MODAL_OPEN, payload: true})
+            dispatch({type: ADD_TODO, payload: name})
+            setName("")  
             setTimeout(() => {
-                dispatch({type: IS_ITEM_ADDED_MSG, payload: false})
-            }, 2000)   
+               return dispatch({type: IS_ADD_ITEM_MODAL_OPEN, payload: false})
+            }, 2000)  
         }
-
-
     }
 
   return (
     <div>
-        {
-            isItemDeleted && <h3 className='item-deleted-msg'>Tehtävä poistettu</h3>
-        }
-        {
-            isItemAddedMsg && <h3 className='item-added-msg'>Tehtävä Lisätty</h3>
-        }
-        <input className='add-input' type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-        <button className='add-btn' onClick={addItem}>Lisää tehtävä</button>
+        <form>
+            <input type="text" className='add-input' required value={name} onChange={(e) => setName(e.target.value)}/>
+            <button className='add-btn' onClick={addTodo} type='submit'>Add</button>
+        </form>
     </div>
   )
 }

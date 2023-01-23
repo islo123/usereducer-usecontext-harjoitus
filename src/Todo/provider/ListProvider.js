@@ -1,20 +1,23 @@
 import { createContext, useReducer } from "react"
 import { listReducer } from "../reducer/ListReducer"
 
-export const ListProviderContext = createContext() 
+export const ListContext = createContext()
 
-const defaulState = {
+const defaultState = {
     todo: [],
-    isItemAddedMsg: false,
-    isItemDeleted: false,
+    isAddItemModalOpen: false,
+    isDeleteItemModalOpen: false,
 }
 
+
+
 export const ListProvider = ({children}) => {
-    const [ state, dispatch ] = useReducer(listReducer, defaulState)
+
+    const [ state, dispatch ] = useReducer(listReducer, defaultState)
 
     return (
-        <ListProviderContext.Provider value={{...state, dispatch}}>
+         <ListContext.Provider value={{...state, dispatch}}>
             {children}
-        </ListProviderContext.Provider>
+         </ListContext.Provider>
     )
 }

@@ -45,7 +45,7 @@
 
 }
 
-.item-added-msg {
+.item-added-modal {
     position: absolute;
     left: 50%;
     top: 20%;
@@ -58,7 +58,7 @@
     color: blue;
 }
 
-.item-deleted-msg {
+.item-deleted-modal {
     position: absolute;
     left: 50%;
     top: 20%;
@@ -67,7 +67,7 @@
     height: 100px;
     text-align: center;
     padding-top: 40px;
-    background-color: red;
+    background-color: violet;
     color: blue;
 }
 

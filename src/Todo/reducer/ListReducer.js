@@ -1,40 +1,61 @@
-export const ADD_ITEM = "ADD_ITEM"
+
+export const ADD_TODO = "ADD_TODO"
 export const DELETE_ITEM = "DELETE_ITEM"
-export const DELETE_ALL = "DELETE_ALL"
-export const IS_ITEM_ADDED_MSG = "IS_ITEM_ADDED_MSG"
-export const IS_ITEM_DELETED = "IS_ITEM_DELETED"
+export const DELETE_LIST = "DELETE_LIST"
+export const IS_ADD_ITEM_MODAL_OPEN = "IS_ADD_ITEM_MODAL_OPEN"
+export const IS_DELETE_ITEM_MODAL_OPEN = "IS_DELETE_ITEM_MODAL_OPEN"
+export const ITEM_CHECKED = "ITEM_CHECKED"
+export const FILTER_ITEM_CHECKBOX = "FILTER_ITEM_CHECKBOX"
+
 
 export const listReducer = (state, action) => {
     switch(action.type) {
-        case ADD_ITEM:
-            const newTodo = { id: Math.random(Date.now()), name: action.payload }
+        case ADD_TODO:
+            const newTodo = { id: Math.random(Date.now()), name: action.payload, itemChecked: false}
             return {
                 ...state,
                 todo: [...state.todo, newTodo]
             }
         case DELETE_ITEM:
+            const filter = state.todo.filter(({id}) => {
+                return id !== action.payload
+            })
             return {
                 ...state,
-                todo: state.todo.filter(({id}) => {
-                    return id !== action.payload
-                    })
+                todo: filter
             }
-        case DELETE_ALL:
+        case DELETE_LIST:
             return {
                 ...state,
                 todo: []
             }
-        case IS_ITEM_ADDED_MSG:
+        case IS_ADD_ITEM_MODAL_OPEN:
             return {
                 ...state,
-                isItemAddedMsg: action.payload
+                isAddItemModalOpen: action.payload
             }
-        case IS_ITEM_DELETED:
+        case IS_DELETE_ITEM_MODAL_OPEN:
             return {
                 ...state,
-                isItemDeleted: action.payload
+                isDeleteItemModalOpen: action.payload
             }
-        default: 
+        case ITEM_CHECKED:
+            return  {
+                ...state,
+                todo: state.todo.map((todo) => {
+                if(todo.id === action.payload) {
+                    return { ...todo, itemChecked: !todo.itemChecked}
+                }
+                return todo
+            })}
+        case FILTER_ITEM_CHECKBOX:
+            return {
+                ...state,
+                todo: state.todo.filter((props) => {
+                    return props.itemChecked === action.payload
+                })
+            }
+        default:
             return state
     }
 }

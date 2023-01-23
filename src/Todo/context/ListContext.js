@@ -1,7 +1,7 @@
 import { useContext } from "react"
-import { ListProviderContext } from "../provider/ListProvider"
+import { ListContext } from "../provider/ListProvider"
 
 
 export const useListContext = () => {
-    return useContext(ListProviderContext)
+    return useContext(ListContext)
 }
