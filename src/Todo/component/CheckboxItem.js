@@ -17,7 +17,7 @@ export default function CheckboxItem() {
   return (
     <div>
         <button onClick={() => checkedItem()}>Checked</button>
-        <button onClick={() => checkItem()}>Not Checked</button>
+        <button onClick={() => checkItem()}>Unchecked</button>
     </div>
   )
 }
