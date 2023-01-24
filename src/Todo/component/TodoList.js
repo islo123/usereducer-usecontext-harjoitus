@@ -19,11 +19,11 @@ export default function TodoList() {
   return (
     <div className='item-container'>
         {
-           todo.map(({name, id, itemChecked}) => {
+           todo.map(({ name, id }) => {
                 return (
                     <div key={id} className='item'>
                         <h3 className='item-name'>{name}</h3>
-                        <input type="checkbox" value={itemChecked} onChange={() => dispatch({type: ITEM_CHECKED, payload: id})}/>
+                        <input type="checkbox" onChange={() => dispatch({type: ITEM_CHECKED, payload: id})}/>
                         <button onClick={() => deleteItem(id)} className='delete-btn'>X</button>
                     </div>
                 )
